@@ -19,30 +19,18 @@ password VARCHAR NOT NULL,
 email VARCHAR NOT NULL
 );
 
-CREATE TABLE blogs(
-id SERIAL PRIMARY KEY,
-blog_url VARCHAR NOT NULL,
-posts INT NOT NULL,
-title VARCHAR NOT NULL,
-users_id INT REFERENCES users(id) ON DELETE CASCADE
-);
-
 CREATE TABLE posts(
   id SERIAL PRIMARY KEY,
   blog_id INT REFERENCES blog(id) ON DELETE CASCADE,
   users_id INT REFERENCES users(id) ON DELETE CASCADE,
   text_title TEXT NOT NULL,
   text_body TEXT NOT NULL,
-  post_tags_id INT REFERENCES tags(id),
-  post_tag_handle VARCHAR NOT NULL
+
 );
 -- The id and the tagName is made for the tag at the creation of a post,
 -- But what if they user is adding an already in use tag. That then already has a handle and id to go with it.
 -- If not it creates one on the spot for the tags table?!?
-CREATE TABLE blog_users(
-  blog_id INT REFERENCES blog(id),
-  user_id INT REFERENCES users(id)
-);
+
 
 CREATE TABLE tags(
   id SERIAL PRIMARY KEY,
@@ -56,6 +44,7 @@ CREATE TABLE tags(
  -- images have tags
  -- can a blog have a tag?
 
+-- This is a join table on tags and posts
 CREATE TABLE posts_tags(
   post_id INT REFERENCES posts(id),
   tag_id INT REFERENCES tags(id)
@@ -76,11 +65,11 @@ CREATE TABLE posts_images(
 
 CREATE TABLE followers(
   user_id INT REFERENCES users(id),
-  follower_id
 );
+-- users(id) is following users(id) is all I want for the followers table to say. 
 
 CREATE TABLE likes(
-  id SERIAL PRIMARY KEY
+  id SERIAL PRIMARY KEY,
   user_id INT REFERENCES users(id),
   post_id INT REFERENCES posts(id)
 
