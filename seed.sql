@@ -26,22 +26,20 @@ CREATE TABLE posts(
   post_type VARCHAR NOT NULL
 );
 -- post_type can be an 'image' 'video' or 'audio' or 'text' then in post queries you write the if statement to determine what kind of post it is.
-
 CREATE TABLE tags(
   id SERIAL PRIMARY KEY,
   handle VARCHAR NOT NULL
 );
-
 CREATE TABLE posts_tags(
   post_id INT REFERENCES posts(id),
   tag_id INT REFERENCES tags(id)
 
 );
-
-CREATE TABLE followers(
-  user_id INT REFERENCES users(id),
+CREATE TABLE following(
+id SERIAL PRIMARY KEY,
+follower_id INTEGER REFERENCES Users(id)   ON DELETE CASCADE,
+folllowing_id INTEGER REFERENCES Users(id) ON DELETE CASCADE
 );
--- users(id) is following users(id) is all I want for the followers table to say.
 CREATE TABLE likes(
   id SERIAL PRIMARY KEY,
   user_id INT REFERENCES users(id),
