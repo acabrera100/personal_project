@@ -11,7 +11,6 @@ class App extends Component {
   return (
     <BrowserRouter>
       <div className = "App">
-      This is Tumbles
       <Route component={Navbar}/>
         <Switch>
         <Route exact path='/' component={Home}/>

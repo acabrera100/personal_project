@@ -1,0 +1,32 @@
+.navbuttons{
+/* display: flex;
+justify-content: flex-end; */
+background-color:#93A595;
+opacity: 90%;
+margin-top: 5px;
+}
+
+.search {
+  /* background-color:#7EBDC2; */
+  margin-top: 6px;
+}
+.search input {
+     height: 30px;
+     width: 540px;
+}
+.Navbar{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  background-color: #B5CBB7;
+  margin-bottom: 5px;
+  height: 50px;
+}
+ hr{
+   margin-top: auto;
+   border: 1px solid black;
+ }
+
+ img{
+   margin-top: 5px;
+ }
