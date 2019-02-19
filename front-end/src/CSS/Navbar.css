@@ -9,10 +9,15 @@ margin-top: 5px;
 .search {
   /* background-color:#7EBDC2; */
   margin-top: 6px;
-}
+  }
+
 .search input {
      height: 30px;
      width: 540px;
+     background-image: url("https://img.icons8.com/dotty/20/000000/search.png");
+     background-repeat: no-repeat;
+      background-position: 0 50%;
+      text-indent:20px;
 }
 .Navbar{
   display: flex;
