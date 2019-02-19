@@ -1,8 +1,26 @@
+.dashboard{
+  background-color: #546A7B;
+  height: 100%;
+
+}
+.test{
+  display: flex;
+  justify-content: flex-start;
+  margin-left: 320px;
+  margin-top: 50px;
+}
 .post_type{
   width: 545px;
   height: 50px;
   border-radius: 10px;
  background: #FDFDFF;
  padding: 20px;
- margin-left: 320px;
+ /* margin-left: 320px; */
+}
+
+.avatar{
+background-color: #393D3F;
+height: 70;
+border-radius: 10px;
+margin-right: 20px;
 }

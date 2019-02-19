@@ -8,19 +8,22 @@ export default class Dashboard extends React.Component{
     this.state={}
   }
 render(){
-  return(<>
+  return(<div className="dashboard">
     <p>Hello this is the dashboard where all of your posts and feed from other people show up.
     This should be the page it routes you to after you login where it is your blog.\
     </p>
-    <br/>
-    <p>How about an avatar image? as a seperate div? </p>
-
-    <div className="post_type">
+    <div className ="test">
+      <div className= "avatar">
+      <img  src='https://img.icons8.com/dotty/80/000000/user-male.png'alt="something"/>
+      </div>
+      <div className="post_type">
       This is where you can add TEXT IMAGE AUDIO OR (VIDEO)?
+      <button><img src="https://img.icons8.com/material-outlined/24/000000/text.png"alt='something'/></button>
+      </div>
     </div>
 
 
-  </>
+  </div>
 )
 }
 }
