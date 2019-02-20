@@ -26,19 +26,6 @@ export default class Dashboard extends React.Component {
   render() {
     return (
       <div className="dashboard">
-        <div className="Modal">
-        <button onClick={this.openModal}>Open Modal</button>
-        <Modal
-          className="modal-content"
-          isOpen={this.state.modalIsOpen}
-          onAfterOpen={this.afterOpenModal}
-          onRequestClose={this.closeModal}
-        >
-          <h2 ref={subtitle => (this.subtitle = subtitle)}>Hello</h2>
-          <button onClick={this.closeModal}>close</button>
-          <div>I am a modal</div>
-        </Modal>
-        </div>
         <p>
           Hello this is the dashboard where all of your posts and feed from
           other people show up. This should be the page it routes you to after
@@ -52,30 +39,104 @@ export default class Dashboard extends React.Component {
             />
           </div>
           <div className="post_type">
-            <button>
+            <button onClick={this.openModal}>
               <img
+                className ="postImage"
                 src="https://img.icons8.com/material-outlined/24/000000/text.png"
                 alt="text"
               />
             </button>
-            <button>
+            <Modal
+              className="modal-content"
+              isOpen={this.state.modalIsOpen}
+              onAfterOpen={this.afterOpenModal}
+              onRequestClose={this.closeModal}
+            >
+              <h2 ref={subtitle => (this.subtitle = subtitle)}>title</h2>
+              <form>
+                <input type="text" placeholder="Title" />
+                <input type="text" placeholder="Your Text Here" />
+                <input type="text" placeholder="tags" />
+              </form>
+              <button onClick={this.closeModal}>close</button>
+              <button>Submit</button>
+            </Modal>
+
+            <button onClick={this.openModal}>
               <img
+                className ="postImage"
                 src="https://img.icons8.com/material-outlined/24/000000/headphones.png"
                 alt="audio"
               />
             </button>
-            <button>
+            <Modal
+              className="modal-content"
+              isOpen={this.state.modalIsOpen}
+              onAfterOpen={this.afterOpenModal}
+              onRequestClose={this.closeModal}
+            >
+              <h2 ref={subtitle => (this.subtitle = subtitle)}>
+                Add an image by inserting the URL
+              </h2>
+              <form>
+                <input type="text" placeholder="Title" />
+                <input type="text" placeholder="Your Text Here" />
+                <input type="text" placeholder="tags" />
+              </form>
+              <button onClick={this.closeModal}>close</button>
+              <button>Submit</button>
+            </Modal>
+
+            <button onClick={this.openModal}>
               <img
+                className ="postImage"
                 src="https://img.icons8.com/material-outlined/24/000000/compact-camera.png"
                 alt="pictya"
               />
             </button>
-            <button>
-              <img
-                src="https://img.icons8.com/material-outlined/24/000000/documentary.png"
-                alt="video"
-              />
+            <Modal
+              className="modal-content"
+              isOpen={this.state.modalIsOpen}
+              onAfterOpen={this.afterOpenModal}
+              onRequestClose={this.closeModal}
+            >
+              <h2 ref={subtitle => (this.subtitle = subtitle)}>
+                Add an image by inserting the URL
+              </h2>
+              <form>
+                <input type="text" placeholder="Title" />
+                <input type="text" placeholder="Your Text Here" />
+                <input type="text" placeholder="tags" />
+              </form>
+              <button onClick={this.closeModal}>close</button>
+              <button>Submit</button>
+            </Modal>
+
+            <button onClick={this.openModal}>
+            <img
+              className ="postImage"
+              src="https://img.icons8.com/material-outlined/24/000000/documentary.png"
+              alt="video"
+            />
             </button>
+            <Modal
+              className="modal-content"
+              isOpen={this.state.modalIsOpen}
+              onAfterOpen={this.afterOpenModal}
+              onRequestClose={this.closeModal}
+            >
+              <h2 ref={subtitle => (this.subtitle = subtitle)}>
+                Something else
+              </h2>
+              <form>
+                <input type="text" placeholder="Title" />
+                <input type="text" placeholder="Your Text Here" />
+                <input type="text" placeholder="tags" />
+              </form>
+              <button onClick={this.closeModal}>close</button>
+              <button>Submit</button>
+            </Modal>
+
           </div>
         </div>
         <p>

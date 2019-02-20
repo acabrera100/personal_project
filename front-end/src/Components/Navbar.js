@@ -7,14 +7,19 @@ export const Navbar = () =>{
   return (
     <>
       <div className="Navbar">
-    <img src="https://img.icons8.com/dotty/40/000000/tumblr.png" alt="Img Not Working"/>
-    <form className="search">
-    <input className ="text" placeholder="  Search..." type="text" value="" name="search" id="search"/>
-    </form>
-    <nav className="navbuttons">
-    <Link to="/"><img src="https://img.icons8.com/dotty/40/000000/home.png" alt="favicon here"/></Link>
-    <Link to="/dashboard"><img src="https://img.icons8.com/dotty/40/000000/for-you.png" alt='favicon here'/></Link>
-    </nav>
+        <Link to="/dashboard"><img src="https://img.icons8.com/dotty/40/000000/tumblr.png" alt="favicon here"/></Link>
+
+        <form className="search">
+        <input className ="text" placeholder="  Search..." type="text" value="" name="search" id="search"/>
+        </form>
+
+        <nav className="navbuttons">
+        <Link to="/"><img src="https://img.icons8.com/dotty/40/000000/home.png" alt="favicon here"/></Link>
+        <Link to="/explore"><img src="https://img.icons8.com/dotty/40/000000/compass.png" alt='favicon here'/></Link>
+        <Link to="/dashboard"><img src="https://img.icons8.com/dotty/40/000000/for-you.png" alt='favicon here'/></Link>
+        <Link to="/login"><img src="https://img.icons8.com/dotty/40/000000/gender-neutral-user.png" alt="favicon here"/></Link>
+
+        </nav>
     </div>
     <hr/>
     </>
