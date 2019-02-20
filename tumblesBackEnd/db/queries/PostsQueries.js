@@ -8,7 +8,7 @@ const getSinglePost = (req, res, next) => {
       res.status(200);
       res.json({
         status: "success",
-        message: "The profile information about this user",
+        message: "Retrieved a single post",
         body: data
       });
     })
@@ -28,6 +28,26 @@ const getAllPosts = (req,res,next) =>{
 .catch(err => next(err));
 }
 
+const getPostsByTag = ( req, res, next ) => {
+ let tagId = req.params.id
+ db.any('SELECT * FROM post_tags WHERE tag_id=$1',tagId)
+   .then(data => {
+     res.status(200).json({
+       status:"Success",
+       message: 'These are the posts associated with this tag',
+       body:data
+     })
+   })
+   .catch(err => {
+     res.status(404).json({
+       status:404,
+       message:'Something Went wrong! Could not GET posts by Tag id'
+     })
+    next(err)
+   })
+};
+
+
 // Have not worked on the logic to determine post_type
 //  if yada yada then its a text else if video yada yada
 
@@ -37,7 +57,7 @@ const createPost = (req, res, next) => {
       res.status(200)
         .json({
           status: 'success',
-          message: 'You have created a new Tumbles account'
+          message: 'You added a post to your blog!'
         })
     })
     .catch(err => {
@@ -55,7 +75,7 @@ const updatePost = (req, res, next) => {
     res.status(200)
       .json({
         status: 'success',
-        message: 'Updated this user account!'
+        message: 'Updated the post!'
       })
   })
   .catch(err => {
@@ -84,7 +104,7 @@ const deletePost = (req, res, next) => {
     .then(result => {
       res.status(200).json({
         status: "success",
-        message: "You deleted the user",
+        message: "You deleted the post",
         body: result
       });
     })
@@ -92,4 +112,4 @@ const deletePost = (req, res, next) => {
 };
 
 
-module.exports = {createPost,updatePost,getSinglePost,getAllPosts,deletePost}
+module.exports = {createPost,updatePost,getPostsByTag,getSinglePost,getAllPosts,deletePost}
