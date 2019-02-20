@@ -24,7 +24,7 @@
 }
 .postImage:hover{
   background-color: ;
-  animation: bounce .5s
+  animation: bounce 1s
 }
 
 @keyframes bounce {
