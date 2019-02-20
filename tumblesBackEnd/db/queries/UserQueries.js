@@ -1,9 +1,6 @@
 const {db} = require("./index.js")
 
 
-
-// REMEMBER  middleware functions
-
 const getSingleUser = (req, res, next) => {
   // the word entered in the wildcard for id. that way when choosing from one of the database
   // we return a single user. So in this case if you go to your profile account page
@@ -21,6 +18,19 @@ const getSingleUser = (req, res, next) => {
     })
     .catch(err => next(err));
 };
+
+const getAllUsers = (req,res,next) =>{
+  db.any('SELECT * FROM users')
+  .then(data =>{
+    res.status(200);
+    res.json({
+    status:"success",
+    message:"Retrieved all users",
+    body:data
+  })
+})
+.catch(err => next(err));
+}
 
 const createUser = (req, res, next) => {
   db.none('INSERT INTO users(username,password,email) VALUES(${username},${password},${email})', req.body)
@@ -57,7 +67,7 @@ const updateUser = (req, res, next) => {
 // I want to see the text_title, text_body, tags associated with this post
 const getAllPostsByUser = (req,res,next) => {
   let userId = parseInt(req.params.id);
-  db.one("SELECT text_title,text_body FROM posts WHERE id = $1", [userId])
+  db.one("SELECT text_title, text_body, handle,COUNT(user_id ) AS Likes FROM posts JOIN posts_tags ON post_id = posts.id JOIN tags ON tag_id = tags.id JOIN likes ON likes.post_id = posts.id WHERE users_id = 1 GROUP BY text_title, text_body, handle", [userId])
     .then(data => {
       res.status(200);
       res.json({
@@ -68,6 +78,21 @@ const getAllPostsByUser = (req,res,next) => {
     })
     .catch(err => next(err));
 }
+// the query works on psequel Idk why it doesnt work
+// relation "posts" does not exist
+// error: relation "posts" does not exist
+const deleteUser = (req, res, next) => {
+  let userId = parseInt(req.params.id);
+  db.result("DELETE FROM users WHERE id=${id}", userId)
+    .then(result => {
+      res.status(200).json({
+        status: "success",
+        message: "You deleted the user",
+        body: result
+      });
+    })
+    .catch(err => next(err));
+};
 
 
-module.exports = {createUser,updateUser,getSingleUser}
+module.exports = {createUser,updateUser,getSingleUser,getAllUsers,deleteUser,getAllPostsByUser}
