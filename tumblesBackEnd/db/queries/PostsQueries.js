@@ -1,26 +1,26 @@
 const {db} = require("./index.js")
 
 
-// const getSinglePost = (req, res, next) => {
-//   let postId = parseInt(req.params.id);
-//   db.one("SELECT * FROM posts WHERE id = $1", {postId})
-//     .then(data => {
-//       res.status(200);
-//       res.json({
-//         status: "success",
-//         message: "Retrieved a single post",
-//         body: data
-//       });
-//     })
-//     .catch(err => {
-//       console.log(err)
-//       return next(err)})
-// };
+const getSinglePost = (req, res, next) => {
+  let postId = parseInt(req.params.id);
+  db.one("SELECT * FROM posts WHERE id = $1", [postId])
+    .then(data => {
+      res.status(200);
+      res.json({
+        status: "success",
+        message: "Retrieved a single post",
+        body: data
+      });
+    })
+    .catch(err => {
+      console.log(err)
+      return next(err)})
+};
 
 const getAllPosts = (req,res,next) =>{
   db.any("SELECT * FROM posts")
   .then(data =>{
-    
+
     res.json({
     status:"success",
     message:"Retrieved all posts",
@@ -55,7 +55,7 @@ const getAllPosts = (req,res,next) =>{
 
 // Have not worked on the logic to determine post_type
 //  if yada yada then its a text else if video yada yada
-
+//
 // const createPost = (req, res, next) => {
 //   db.none('INSERT INTO posts(text_title,text_body,url) VALUES(${text_title},${text_body},${url})', req.body)
 //     .then(() => {
@@ -119,6 +119,6 @@ const getAllPosts = (req,res,next) =>{
 // };
 
 
-module.exports = {getAllPosts}
+module.exports = {getAllPosts,getSinglePost}
 
 // createPost, updatePost,

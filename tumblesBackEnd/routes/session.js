@@ -8,6 +8,12 @@ router.post('/new',db.createUser);
 router.post("/login", passport.authenticate("local", {}), db.loginUser);
 router.post('/logout',loginRequired,db.logoutUser);
 
+const {
+      createUser,
+      loginUser,
+      isLoggedIn,
+      logoutUser
+    } = require("../db/queries/loginQueries.js");
 
 
 

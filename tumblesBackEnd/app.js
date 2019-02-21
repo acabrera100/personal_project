@@ -4,7 +4,7 @@ var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 const session = require("express-session");
-const passport = require("passport");
+const passport = require("./auth/local");
 
 var indexRouter = require("./routes/index.js");
 var usersRouter = require("./routes/users.js");
@@ -26,16 +26,10 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
-app.use("/", indexRouter);
-app.use("/users", usersRouter);
-app.use("/posts", postsRouter);
-app.use("/followers", followRouter);
-app.use('/session', sessionRouter)
-
 // Reeds secret state. For learnin purposes
 app.use(
   session({
-    secret: "la le lu li lo",
+    secret: "This is a secret",
     resave: false,
     saveUninitialized: true
   })
@@ -43,6 +37,14 @@ app.use(
 
 app.use(passport.initialize());
 app.use(passport.session());
+
+app.use("/", indexRouter);
+app.use("/users", usersRouter);
+app.use("/posts", postsRouter);
+app.use("/followers", followRouter);
+app.use('/session', sessionRouter)
+
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
