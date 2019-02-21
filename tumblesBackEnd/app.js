@@ -10,6 +10,9 @@ var indexRouter = require("./routes/index.js");
 var usersRouter = require("./routes/users.js");
 var postsRouter = require("./routes/posts.js");
 var followRouter = require("./routes/followers.js");
+var sessionRouter = require("./routes/session.js");
+
+
 
 var app = express();
 
@@ -27,6 +30,7 @@ app.use("/", indexRouter);
 app.use("/users", usersRouter);
 app.use("/posts", postsRouter);
 app.use("/followers", followRouter);
+app.use('/session', sessionRouter)
 
 // Reeds secret state. For learnin purposes
 app.use(

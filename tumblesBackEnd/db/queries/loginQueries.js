@@ -1,8 +1,6 @@
-var pgp = require("pg-promise")({});
-var connectionString = "postgres://localhost/tumblrdatabase";
-var db = pgp(connectionString);
+const {db} = require("./index.js");
 
-const authHelpers = require("../auth/helpers");
+const authHelpers = require("../../auth/helpers.js");
 
 function createUser(req, res, next) {
   const hash = authHelpers.createHash(req.body.password);
