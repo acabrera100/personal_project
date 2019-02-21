@@ -65,19 +65,19 @@ const updateUser = (req, res, next) => {
 }
 // When I am at the dashboard I want to see all the posts by me. or when I am at someone else's page I want to see all of their posts
 // I want to see the text_title, text_body, tags associated with this post
-// const getAllPostsByUser = (req,res,next) => {
-//   let userId = parseInt(req.params.id);
-//   db.one("SELECT text_title, text_body, handle,COUNT(user_id ) AS Likes FROM posts JOIN posts_tags ON post_id = posts.id JOIN tags ON tag_id = tags.id JOIN likes ON likes.post_id = posts.id WHERE users_id = 1 GROUP BY text_title, text_body, handle", [userId])
-//     .then(data => {
-//       res.status(200);
-//       res.json({
-//         status: "success",
-//         message: "This is all the posts by this user",
-//         body: data
-//       });
-//     })
-//     .catch(err => next(err));
-// }
+const getAllPostsByUser = (req,res,next) => {
+  let userId = parseInt(req.params.id);
+  db.one("SELECT text_title, text_body, handle,COUNT(user_id ) AS Likes FROM posts JOIN posts_tags ON post_id = posts.id JOIN tags ON tag_id = tags.id JOIN likes ON likes.post_id = posts.id WHERE users_id = 1 GROUP BY text_title, text_body, handle", [userId])
+    .then(data => {
+      res.status(200);
+      res.json({
+        status: "success",
+        message: "This is all the posts by this user",
+        body: data
+      });
+    })
+    .catch(err => next(err));
+}
 // the query works on psequel Idk why it doesnt work
 // relation "posts" does not exist
 // error: relation "posts" does not exist
@@ -95,4 +95,4 @@ const deleteUser = (req, res, next) => {
 };
 
 
-module.exports = {createUser,updateUser,getSingleUser,getAllUsers,deleteUser}
+module.exports = {createUser,updateUser,getSingleUser,getAllUsers,deleteUser,getAllPostsByUser}

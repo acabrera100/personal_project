@@ -1,13 +1,13 @@
 var express = require('express');
 var router = express.Router();
 
-const {getSinglePost,getAllPosts,deletePost} = require("../db/queries/PostsQueries.js")
+const {getAllPosts} = require("../db/queries/PostsQueries.js")
 
 router.get("/",getAllPosts);
-router.get("/:id", getSinglePost)
+// router.get("/:id", getSinglePost)
 // router.post("/",createPosts)
 // router.put("/:id", updatePosts)
-router.delete("/:id",deletePost)
+// router.delete("/:id",deletePost)
 module.exports = router;
 
 // createPosts,updatePosts,

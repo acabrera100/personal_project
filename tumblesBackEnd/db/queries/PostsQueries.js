@@ -1,26 +1,26 @@
 const {db} = require("./index.js")
 
 
-const getSinglePost = (req, res, next) => {
-  let postId = parseInt(req.params.id);
-  db.one("SELECT * FROM posts WHERE id = $1", [postId])
-    .then(data => {
-      res.status(200);
-      res.json({
-        status: "success",
-        message: "Retrieved a single post",
-        body: data
-      });
-    })
-    .catch(err => {
-      console.log(err)
-      return next(err)})
-};
+// const getSinglePost = (req, res, next) => {
+//   let postId = parseInt(req.params.id);
+//   db.one("SELECT * FROM posts WHERE id = $1", {postId})
+//     .then(data => {
+//       res.status(200);
+//       res.json({
+//         status: "success",
+//         message: "Retrieved a single post",
+//         body: data
+//       });
+//     })
+//     .catch(err => {
+//       console.log(err)
+//       return next(err)})
+// };
 
 const getAllPosts = (req,res,next) =>{
-  db.any('SELECT * FROM posts')
+  db.any("SELECT * FROM posts")
   .then(data =>{
-    res.status(200);
+    
     res.json({
     status:"success",
     message:"Retrieved all posts",
@@ -31,6 +31,7 @@ const getAllPosts = (req,res,next) =>{
       console.log(err)
       return next(err)})
 }
+
 
 // const getPostsByTag = ( req, res, next ) => {
 //  let tagId = req.params.id
@@ -102,22 +103,22 @@ const getAllPosts = (req,res,next) =>{
 //     .catch(err => next(err));
 // }
 
-const deletePost = (req, res, next) => {
-  let postId = parseInt(req.params.id);
-  db.result("DELETE FROM posts WHERE id=${id}", postId)
-    .then(result => {
-      res.status(200).json({
-        status: "success",
-        message: "You deleted the post",
-        body: result
-      });
-    })
-    .catch(err => {
-        console.log(err)
-        return next(err)})
-};
+// const deletePost = (req, res, next) => {
+//   let postId = parseInt(req.params.id);
+//   db.result("DELETE FROM posts WHERE id=${id}", postId)
+//     .then(result => {
+//       res.status(200).json({
+//         status: "success",
+//         message: "You deleted the post",
+//         body: result
+//       });
+//     })
+//     .catch(err => {
+//         console.log(err)
+//         return next(err)})
+// };
 
 
-module.exports = {getSinglePost, getAllPosts, deletePost}
+module.exports = {getAllPosts}
 
 // createPost, updatePost,
