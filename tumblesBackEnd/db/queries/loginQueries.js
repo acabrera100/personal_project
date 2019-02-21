@@ -6,8 +6,8 @@ function createUser(req, res, next) {
   const hash = authHelpers.createHash(req.body.password);
 
   db.none(
-    "INSERT INTO users (username, password_digest) VALUES (${username}, ${password})",
-    { username: req.body.username, password: hash }
+    "INSERT INTO users (username, password_digest,email) VALUES (${username}, ${password_digest},${email})",
+    { username: req.body.username, password_digest: hash , email:req.body.email}
   )
     .then(() => {
       res.status(200).json({
