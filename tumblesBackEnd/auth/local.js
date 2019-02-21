@@ -1,0 +1,1 @@
+// local.js determines whether or not we will, in fact, assign a session token to a user who is logging in - in other words, we make sure to check whether the user exists in the database and whether the provided password is correct.
