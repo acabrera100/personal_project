@@ -15,7 +15,7 @@ DROP TABLE posts CASCADE;
 CREATE TABLE users(
 id SERIAL PRIMARY KEY,
 username VARCHAR NOT NULL,
-password VARCHAR NOT NULL,
+password_digest VARCHAR NOT NULL,
 email VARCHAR NOT NULL
 );
 
@@ -50,7 +50,7 @@ CREATE TABLE likes(
 
 );
 
-INSERT INTO users(username, password ,email) VALUES ('Wakanda','panther', 'bpanther@king.com'), ('Spooderman','parker', 'spidey69@hotmail.com'), ('GoRigoGo','jagger', 'RigobertoUran1@gmail.com'),  ('Solidus','lalelulilo', 'hideoKojimbo@otaku.com'), ('GPW','corndilly', 'marblesmarbles@snes.com');
+INSERT INTO users(username, password_digest ,email) VALUES ('Wakanda','panther', 'bpanther@king.com'), ('Spooderman','parker', 'spidey69@hotmail.com'), ('GoRigoGo','jagger', 'RigobertoUran1@gmail.com'),  ('Solidus','lalelulilo', 'hideoKojimbo@otaku.com'), ('GPW','corndilly', 'marblesmarbles@snes.com');
 INSERT INTO posts(users_id, text_title, text_body, url, post_type) VALUES ( 1, 'post 1', 'Wakanda here just saying hello to my Tumbles peoples','','text'), ( 1, 'post 2', 'Did I get the Thanos Snap?','','text'), ( 2, 'post 1', 'Spooderman points finger at himself','','text'), (3, 'post uno', 'Parce me voy a ganar este Tour de Colombia','','text'), (4, 'Dead Cells', 'LIKWIT ','','text'),  (5, 'Barb da King', 'Mario Maker 2 looking good ','','text');
 INSERT INTO tags(handle) VALUES ('marvel'), ('metalgear'), ('hashtag'), ('testerguy'), ('personal_project');
 INSERT INTO following(follower_id, following_id) VALUES (1,2), (1,3), (1,4), (2,5), (5,1), (5,2), (5,3), (5,4), (3,4), (3,1);
