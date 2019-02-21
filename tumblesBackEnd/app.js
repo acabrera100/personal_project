@@ -3,6 +3,8 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+const session = require("express-session");
+const passport = require("passport")
 
 var indexRouter = require('./routes/index.js');
 var usersRouter = require('./routes/users.js');
@@ -26,7 +28,17 @@ app.use('/users', usersRouter);
 app.use('/posts', postsRouter);
 app.use('/followers', followRouter);
 
+// Reeds secret state. For learnin purposes
+app.use(
+  session({
+    secret:"la le lu li lo",
+    resave:false,
+    saveUninitialized: true
+  })
+)
 
+app.use(passport.initialize());
+app.use(passport.session());
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
