@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Switch, Link , Route  } from "react-router-dom";
 // import { Navbar } from "./Components/Navbar";
 import Dashboard from "./Components/Dashboard";
-// import { Home } from "./Components/Home";
+import { Home } from "./Components/Home";
 // import { Explore } from "./Components/Explore";
 // import { Login } from "./Components/Login";
 import axios from "axios";
@@ -67,12 +67,14 @@ class App extends Component {
       ) : null;
 
       return (
-        <div>
+        <div className="App">
           <nav>
             {greeting} {logoutButton}
             <Link to="/auth/register">Register</Link> {" ~ "}
             <Link to="/auth/login">Log In</Link> {" ~ "}
             <Link to="/dashboard">Dashboard</Link>
+            <Link to="/home">Home</Link>
+
           </nav>
 
           <Switch>
@@ -88,6 +90,8 @@ class App extends Component {
               }}
             />
             <PrivateRoute path="/dashboard" component={Dashboard} />
+            <PrivateRoute path="/home" component={Home} />
+
           </Switch>
         </div>
       );

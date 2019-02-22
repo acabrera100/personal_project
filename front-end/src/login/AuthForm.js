@@ -8,7 +8,8 @@ import Form from "./Form";
 class AuthForm extends Component {
   state = {
     username: "",
-    password: ""
+    password: "",
+    email:''
   };
 
   handleChange = e => {
@@ -19,9 +20,9 @@ class AuthForm extends Component {
 
   registerUser = async e => {
     e.preventDefault();
-    const { username, password } = this.state;
+    const { username, password,email } = this.state;
 
-    await axios.post("/session/new", { username, password });
+    await axios.post("/session/new", { username, password, email });
 
     Auth.authenticateUser(username);
 
@@ -70,9 +71,9 @@ class AuthForm extends Component {
   };
 
   render() {
-    const { username, password } = this.state;
+    const { username, password,email } = this.state;
     const { isLoggedIn } = this.props;
-
+console.log(this.state.email);
     return (
       <Switch>
         <Route
@@ -82,6 +83,7 @@ class AuthForm extends Component {
               <Form
                 username={username}
                 password={password}
+                email={email}
                 isLoggedIn={isLoggedIn}
                 loginUser={this.loginUser}
                 registerUser={this.registerUser}

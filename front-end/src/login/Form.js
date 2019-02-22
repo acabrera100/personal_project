@@ -5,6 +5,7 @@ const Form = ({
   match,
   username,
   password,
+  email,
   isLoggedIn,
   loginUser,
   registerUser,
@@ -29,6 +30,13 @@ const Form = ({
           placeholder="password"
           onChange={handleChange}
         />
+        <input
+          type="text"
+          value={email}
+          name="email"
+          placeholder="email"
+          onChange={handleChange}
+        />
         <button type="submit">Submit</button>
       </form>
       <p>{isLoggedIn ? "Logged In!" : ""}</p>
@@ -37,3 +45,11 @@ const Form = ({
 };
 
 export default withRouter(Form);
+
+// <input
+//   type="text"
+//   value={email}
+//   name="email"
+//   placeholder="email"
+//   onChange={handleChange}
+// />
