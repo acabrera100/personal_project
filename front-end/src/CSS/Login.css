@@ -1,7 +1,9 @@
 .loginDiv{
-  display: flex;
-  justify-content: space-around;
-  flex-flow: column;
+  display: grid;
+  grid-template-columns: 12px ;
+  grid-template-rows: 12px 12px 12px;
+  justify-content: center;
+  align-content: center;
 
 }
 

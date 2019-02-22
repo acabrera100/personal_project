@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import axios from "axios";
 // import { withRouter } from "react-router";
 import { Route, Switch } from "react-router-dom";
-import Auth from "../utils/Auth";
+import Auth from "../../utils/Auth";
 import Form from "./Form";
 
 class AuthForm extends Component {

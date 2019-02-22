@@ -6,7 +6,7 @@ import { Home } from "./Components/Home";
 // import { Explore } from "./Components/Explore";
 // import { Login } from "./Components/Login";
 import axios from "axios";
-import AuthForm from "./login/AuthForm";
+import AuthForm from "./Components/login/AuthForm.js";
 import Auth from "./utils/Auth";
 import PrivateRoute from "./utils/AuthRouting";
 
@@ -62,7 +62,7 @@ class App extends Component {
       ) : null;
       let logoutButton = isLoggedIn ? (
         <span>
-          <button onClick={this.logoutUser}>Logout</button> {" ~ "}
+          <button className="logoutButton" Click={this.logoutUser}>Logout</button> {" ~ "}
         </span>
       ) : null;
 

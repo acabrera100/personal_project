@@ -1,5 +1,6 @@
 import React from "react";
 import { withRouter } from "react-router";
+import "../../CSS/Login.css"
 
 const Form = ({
   match,
@@ -14,8 +15,9 @@ const Form = ({
   const path = match.path;
   return (
     <React.Fragment>
+    <div className="loginDiv">
       <h1> {path === "/auth/login" ? "Login" : "Register"} </h1>
-      <form onSubmit={path === "/auth/login" ? loginUser : registerUser}>
+      <form className="loginInput" onSubmit={path === "/auth/login" ? loginUser : registerUser}>
         <input
           type="text"
           value={username}
@@ -40,6 +42,7 @@ const Form = ({
         <button type="submit">Submit</button>
       </form>
       <p>{isLoggedIn ? "Logged In!" : ""}</p>
+      </div>
     </React.Fragment>
   );
 };
