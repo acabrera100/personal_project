@@ -28,7 +28,6 @@ function logoutUser(req, res, next) {
 
 function loginUser(req, res) {
   res.json(req.user);
-  res.status(200).send("log in  success");
 }
 
 function isLoggedIn(req, res) {
