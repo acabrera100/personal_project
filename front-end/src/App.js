@@ -1,15 +1,15 @@
 import React, { Component } from "react";
-import { Switch, Link , Route  } from "react-router-dom";
-// import { Navbar } from "./Components/Navbar";
+import { Switch, Link, Route } from "react-router-dom";
+import { Navbar } from "./Components/Navbar";
 import Dashboard from "./Components/Dashboard";
 import { Home } from "./Components/Home";
-// import { Explore } from "./Components/Explore";
-// import { Login } from "./Components/Login";
+import { Explore } from "./Components/Explore";
+import { Login } from "./Components/Login";
 import axios from "axios";
 import AuthForm from "./Components/login/AuthForm.js";
 import Auth from "./utils/Auth";
 import PrivateRoute from "./utils/AuthRouting";
-
+import { connect } from "react-redux";
 import "./App.css";
 
 class App extends Component {
@@ -54,70 +54,57 @@ class App extends Component {
   };
 
   render() {
-      const { isLoggedIn, username } = this.state;
-      let greeting = isLoggedIn ? (
-        <span>
-          Welcome {username} {" ~ "}
-        </span>
-      ) : null;
-      let logoutButton = isLoggedIn ? (
-        <span>
-          <button className="logoutButton" Click={this.logoutUser}>Logout</button> {" ~ "}
-        </span>
-      ) : null;
+    const { isLoggedIn, username } = this.state;
+    let greeting = isLoggedIn ? (
+      <span>
+        Welcome {username} {" ~ "}
+      </span>
+    ) : null;
+    let logoutButton = isLoggedIn ? (
+      <span>
+        <button className="logoutButton" onClick={this.logoutUser}>
+          Logout
+        </button>{" "}
+        {" ~ "}
+      </span>
+    ) : null;
 
-      return (
-        <div className="App">
-          <nav>
-            {greeting} {logoutButton}
-            <Link to="/auth/register">Register</Link> {" ~ "}
-            <Link to="/auth/login">Log In</Link> {" ~ "}
-            <Link to="/dashboard">Dashboard</Link>
-            <Link to="/home">Home</Link>
+    return (
+      <div className="App">
+        <nav>
+          {greeting} {logoutButton}
+          <Link to="/auth/register">Register</Link> {" ~ "}
+          <Link to="/auth/login">Log In</Link> {" ~ "}
+          <Link to="/dashboard">Dashboard</Link>
+          <Link to="/home">Home</Link>
+        </nav>
 
-          </nav>
-
-          <Switch>
-            <Route
-              path="/auth"
-              render={() => {
-                return (
-                  <AuthForm
-                    checkAuthenticateStatus={this.checkAuthenticateStatus}
-                    isLoggedIn={isLoggedIn}
-                  />
-                );
-              }}
-            />
-            <PrivateRoute path="/dashboard" component={Dashboard} />
-            <PrivateRoute path="/home" component={Home} />
-
-          </Switch>
-        </div>
-      );
-    }
+        <Switch>
+          <Route
+            path="/auth"
+            render={() => {
+              return (
+                <AuthForm
+                  checkAuthenticateStatus={this.checkAuthenticateStatus}
+                  isLoggedIn={isLoggedIn}
+                />
+              );
+            }}
+          />
+          <PrivateRoute path="/dashboard" component={Dashboard} />
+          <PrivateRoute path="/home" component={Home} />
+        </Switch>
+      </div>
+    );
   }
+}
 
+function mapStateToProps(state) {
+  const { alert } = state;
+  return {
+    alert
+  };
+}
 
-export default App;
-
-
-
-
-//
-// render() {
-//   return (
-//     <BrowserRouter>
-//       <div className="App">
-//         <Route component={Navbar} />
-//         <Switch>
-//           <Route exact path="/" component={Home} />
-//           <Route exact path="/dashboard" component={Dashboard} />
-//           <Route exact path="/explore" component={Explore} />
-//           <Route exact path="/login" component={Login} />
-//         </Switch>
-//       </div>
-//     </BrowserRouter>
-//   );
-// }
-// }
+const connectedApp = connect(mapStateToProps)(App);
+export default connectedApp;
