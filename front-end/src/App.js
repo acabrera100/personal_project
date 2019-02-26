@@ -1,15 +1,16 @@
 import React, { Component } from "react";
 import { Switch, Link, Route } from "react-router-dom";
-import { Navbar } from "./Components/Navbar";
+// import { Navbar } from "./Components/Navbar";
 import Dashboard from "./Components/Dashboard";
 import { Home } from "./Components/Home";
-import { Explore } from "./Components/Explore";
-import { Login } from "./Components/Login";
+// import { Explore } from "./Components/Explore";
+// import { Login } from "./Components/Login";
 import axios from "axios";
-import AuthForm from "./Components/login/AuthForm.js";
+// import AuthForm from "./Components/login/AuthForm.js";
+import loginContainer from "./Containers/loginContainer.js"
 import Auth from "./utils/Auth";
 import PrivateRoute from "./utils/AuthRouting";
-import { connect } from "react-redux";
+// import { connect } from "react-redux";
 import "./App.css";
 
 class App extends Component {
@@ -82,14 +83,7 @@ class App extends Component {
         <Switch>
           <Route
             path="/auth"
-            render={() => {
-              return (
-                <AuthForm
-                  checkAuthenticateStatus={this.checkAuthenticateStatus}
-                  isLoggedIn={isLoggedIn}
-                />
-              );
-            }}
+            component ={loginContainer}
           />
           <PrivateRoute path="/dashboard" component={Dashboard} />
           <PrivateRoute path="/home" component={Home} />
@@ -99,12 +93,6 @@ class App extends Component {
   }
 }
 
-function mapStateToProps(state) {
-  const { alert } = state;
-  return {
-    alert
-  };
-}
 
-const connectedApp = connect(mapStateToProps)(App);
-export default connectedApp;
+
+export default App;

@@ -5,6 +5,7 @@ import { Route, Switch } from "react-router-dom";
 import Auth from "../../utils/Auth";
 import Form from "./Form";
 
+
 class AuthForm extends Component {
   state = {
     username: "",
@@ -52,28 +53,18 @@ class AuthForm extends Component {
 
   loginUser = e => {
     e.preventDefault();
-    const { username, password } = this.state;
+  let loginData = {
+    username:this.state.username,
+    password:this.state.password
+  }
+  this.props.login(loginData)
 
-    axios
-      .post("/session/login", { username, password })
-      .then(() => {
-        Auth.authenticateUser(username);
-      })
-      .then(() => {
-        this.props.checkAuthenticateStatus();
-      })
-      .then(() => {
-        this.setState({
-          username: "",
-          password: ""
-        });
-      });
   };
 
   render() {
     const { username, password,email } = this.state;
     const { isLoggedIn } = this.props;
-console.log(this.state.email);
+console.log(this.state);
     return (
       <Switch>
         <Route
@@ -113,3 +104,24 @@ console.log(this.state.email);
 }
 
 export default AuthForm;
+
+//
+// loginUser = e => {
+//   e.preventDefault();
+//   const { username, password } = this.state;
+//
+//   axios
+//     .post("/session/login", { username, password })
+//     .then(() => {
+//       Auth.authenticateUser(username);
+//     })
+//     .then(() => {
+//       this.props.checkAuthenticateStatus();
+//     })
+//     .then(() => {
+//       this.setState({
+//         username: "",
+//         password: ""
+//       });
+//     });
+// };

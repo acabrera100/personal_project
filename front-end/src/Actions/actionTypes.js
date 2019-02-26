@@ -1,12 +1,7 @@
-
-export const ADD_POST = "ADD_POST";
-export const ADD_POSTS = "ADD_POSTS";
-
-
-
 export const LOGIN_REQUESTED = 'LOGIN_REQUESTED';
 export const LOGIN_SUCCEEDED = 'LOGIN_SUCCEEDED';
 export const LOGIN_FAILED = 'LOGIN_FAILED';
+export const LOGGEDIN = "LOGGED_IN"
 
 export const LOGOUT_REQUESTED = 'LOGOUT_REQUESTED';
 export const LOGOUT_SUCCEEDED = 'LOGOUT_SUCCEEDED';
