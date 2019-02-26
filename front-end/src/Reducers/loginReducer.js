@@ -10,7 +10,6 @@ const initialState = {
 const loginReducer = (state = initialState, action) => {
   if (action.type === LOGGEDIN) {
     return ({
-      ...state,
       username: action.payload.username,
       isLoggedIn: Auth.getToken()
     })

@@ -64,7 +64,7 @@ class AuthForm extends Component {
   render() {
     const { username, password,email } = this.state;
     const { isLoggedIn } = this.props;
-console.log(this.state);
+console.log('re-render');
     return (
       <Switch>
         <Route

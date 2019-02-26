@@ -76,7 +76,7 @@ class App extends Component {
           {greeting} {logoutButton}
           <Link to="/auth/register">Register</Link> {" ~ "}
           <Link to="/auth/login">Log In</Link> {" ~ "}
-          <Link to="/dashboard">Dashboard</Link>
+          <Link to="/dashboard">Dashboard</Link>{" ~ "}
           <Link to="/home">Home</Link>
         </nav>
 
