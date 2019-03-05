@@ -36,7 +36,7 @@ const getPostsByTag = (req, res, next) => {
   let tagId = req.params.id;
   // console.log(typeof tagId);
   db.any(
-    "SELECT text_title,text_body,handle,COUNT(user_id) AS Likes FROM posts JOIN posts_tags ON post_id = posts.id JOIN likes ON likes.post_id = posts.id WHERE tags.handle = $1 GROUP BY text_title, text_body, handle",
+    "SELECT text_title,text_body,handle,COUNT(user_id) AS Likes FROM posts JOIN posts_tags ON post_id = posts.id JOIN tags ON tag_id = tags.id JOIN likes ON likes.post_id = posts.id WHERE tags.handle = $1 GROUP BY text_title, text_body, handle",
     tagId
   )
     .then(data => {
