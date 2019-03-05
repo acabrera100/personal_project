@@ -1,5 +1,4 @@
-const {db} = require("./index.js")
-
+const { db } = require("./index.js");
 
 const getSinglePost = (req, res, next) => {
   let postId = parseInt(req.params.id);
@@ -13,62 +12,64 @@ const getSinglePost = (req, res, next) => {
       });
     })
     .catch(err => {
-      console.log(err)
-      return next(err)})
+      console.log(err);
+      return next(err);
+    });
 };
 
-const getAllPosts = (req,res,next) =>{
+const getAllPosts = (req, res, next) => {
   db.any("SELECT * FROM posts")
-  .then(data =>{
+    .then(data => {
+      res.json({
+        status: "success",
+        message: "Retrieved all posts",
+        body: data
+      });
+    })
+    .catch(err => {
+      console.log(err);
+      return next(err);
+    });
+};
 
-    res.json({
-    status:"success",
-    message:"Retrieved all posts",
-    body:data
-  })
-})
-.catch(err => {
-      console.log(err)
-      return next(err)})
-}
-
-
-// const getPostsByTag = ( req, res, next ) => {
-//  let tagId = req.params.id
-//  db.any('SELECT * FROM post_tags WHERE tag_id=$1',tagId)
-//    .then(data => {
-//      res.status(200).json({
-//        status:"Success",
-//        message: 'These are the posts associated with this tag',
-//        body:data
-//      })
-//    })
-//    .catch(err => {
-//      res.status(404).json({
-//        status:404,
-//        message:'Something Went wrong! Could not GET posts by Tag id'
-//      })
-//     next(err)
-//    })
-// };
-
+const getPostsByTag = (req, res, next) => {
+  let tagId = req.params.id;
+  db.any(
+    "SELECT text_title,text_body,handle,COUNT(user_id) AS Likes FROM posts JOIN posts_tags ON post_id = posts.id JOIN likes ON likes.post_id = posts.id WHERE tags.handle = '*' GROUP BY text_title, text_body, handle",
+    tagId
+  )
+    .then(data => {
+      res.status(200).json({
+        status: "Success",
+        message: "These are the posts associated with this tag",
+        body: data
+      });
+    })
+    .catch(err => {
+      res.status(404).json({
+        status: 404,
+        message: "Something Went wrong! Could not GET posts by that Tag"
+      });
+      next(err);
+    });
+};
 
 // Have not worked on the logic to determine post_type
 //  if yada yada then its a text else if video yada yada
 //
-// const createPost = (req, res, next) => {
-//   db.none('INSERT INTO posts(text_title,text_body,url) VALUES(${text_title},${text_body},${url})', req.body)
-//     .then(() => {
-//       res.status(200)
-//         .json({
-//           status: 'success',
-//           message: 'You added a post to your blog!'
-//         })
-//     })
-//     .catch(err => {
-//       console.log(err)
-//       return next(err)})
-// }
+const createPosts = (req, res, next) => {
+  db.none('INSERT INTO posts(text_title,text_body,url) VALUES(${text_title},${text_body},${url})', req.body)
+    .then(() => {
+      res.status(200)
+        .json({
+          status: 'success',
+          message: 'You added a post to your blog!'
+        })
+    })
+    .catch(err => {
+      console.log(err)
+      return next(err)})
+}
 //
 // const updatePost = (req, res, next) => {
 //   db.none('UPDATE posts SET text_title=${text_title}, text_body=${text_body} WHERE id=${id}',{
@@ -118,7 +119,6 @@ const getAllPosts = (req,res,next) =>{
 //         return next(err)})
 // };
 
-
-module.exports = {getAllPosts,getSinglePost}
+module.exports = { getAllPosts, getSinglePost, getPostsByTag,createPosts };
 
 // createPost, updatePost,

@@ -2,8 +2,11 @@
   display: grid;
   grid-template-columns: 12px ;
   grid-template-rows: 12px 12px 12px;
-  justify-content: center;
-  align-content: center;
+  justify-content: flex-start;
+  margin-left: 375px;
+  margin-top: 50px;
+  align-content:center;
+
 
 }
 
@@ -18,3 +21,8 @@ button{
   height:50px;
   width:320px;
 }
+
+/* display: grid;
+grid-template-columns: 12px ;
+grid-template-rows: 12px 12px 12px;
+justify-content: center; */

@@ -29,10 +29,10 @@ class App extends Component {
   checkAuthenticateStatus = () => {
     axios.get("/session/isLoggedIn").then(user => {
       if (user.data.username === Auth.getToken()) {
-        this.setState({
-          isLoggedIn: Auth.isUserAuthenticated(),
-          username: Auth.getToken()
-        });
+        // this.setState({
+        //   isLoggedIn: Auth.isUserAuthenticated(),
+        //   username: Auth.getToken()
+        // });
       } else {
         if (user.data.username) {
           this.logoutUser();
