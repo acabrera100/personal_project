@@ -34,8 +34,9 @@ const getAllPosts = (req, res, next) => {
 
 const getPostsByTag = (req, res, next) => {
   let tagId = req.params.id;
+  // console.log(typeof tagId);
   db.any(
-    "SELECT text_title,text_body,handle,COUNT(user_id) AS Likes FROM posts JOIN posts_tags ON post_id = posts.id JOIN likes ON likes.post_id = posts.id WHERE tags.handle = '*' GROUP BY text_title, text_body, handle",
+    "SELECT text_title,text_body,handle,COUNT(user_id) AS Likes FROM posts JOIN posts_tags ON post_id = posts.id JOIN likes ON likes.post_id = posts.id WHERE tags.handle = $1 GROUP BY text_title, text_body, handle",
     tagId
   )
     .then(data => {
@@ -46,11 +47,8 @@ const getPostsByTag = (req, res, next) => {
       });
     })
     .catch(err => {
-      res.status(404).json({
-        status: 404,
-        message: "Something Went wrong! Could not GET posts by that Tag"
-      });
-      next(err);
+      console.log(err);
+      return next(err);
     });
 };
 
@@ -58,18 +56,21 @@ const getPostsByTag = (req, res, next) => {
 //  if yada yada then its a text else if video yada yada
 //
 const createPosts = (req, res, next) => {
-  db.none('INSERT INTO posts(text_title,text_body,url) VALUES(${text_title},${text_body},${url})', req.body)
+  db.none(
+    "INSERT INTO posts(text_title,text_body,url,post_type) VALUES(${text_title},${text_body},${url},${post_type})",
+    req.body
+  )
     .then(() => {
-      res.status(200)
-        .json({
-          status: 'success',
-          message: 'You added a post to your blog!'
-        })
+      res.status(200).json({
+        status: "success",
+        message: "You added a post to your blog!"
+      });
     })
     .catch(err => {
-      console.log(err)
-      return next(err)})
-}
+      console.log(err);
+      return next(err);
+    });
+};
 //
 // const updatePost = (req, res, next) => {
 //   db.none('UPDATE posts SET text_title=${text_title}, text_body=${text_body} WHERE id=${id}',{
@@ -119,6 +120,6 @@ const createPosts = (req, res, next) => {
 //         return next(err)})
 // };
 
-module.exports = { getAllPosts, getSinglePost, getPostsByTag,createPosts };
+module.exports = { getAllPosts, getSinglePost, getPostsByTag, createPosts };
 
 // createPost, updatePost,
