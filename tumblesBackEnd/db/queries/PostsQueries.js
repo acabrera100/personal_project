@@ -89,37 +89,23 @@ const createPosts = (req, res, next) => {
 //     console.log(err)
 //     return next(err)})
 // }
-// When I am at the dashboard I want to see all the posts by me. or when I am at someone else's page I want to see all of their posts
-// I want to see the text_title, text_body, tags associated with this post
-// const getAllPostsByPost = (req,res,next) => {
-//   let postId = parseInt(req.params.id);
-//   db.one("SELECT text_title, text_body, handle,COUNT(post_id ) AS Likes FROM posts JOIN posts_tags ON post_id = posts.id JOIN tags ON tag_id = tags.id JOIN likes ON likes.post_id = posts.id WHERE posts_id = 1 GROUP BY text_title, text_body, handle", [postId])
-//     .then(data => {
-//       res.status(200);
-//       res.json({
-//         status: "success",
-//         message: "This is all the posts by this post",
-//         body: data
-//       });
-//     })
-//     .catch(err => next(err));
-// }
 
-// const deletePost = (req, res, next) => {
-//   let postId = parseInt(req.params.id);
-//   db.result("DELETE FROM posts WHERE id=${id}", postId)
-//     .then(result => {
-//       res.status(200).json({
-//         status: "success",
-//         message: "You deleted the post",
-//         body: result
-//       });
-//     })
-//     .catch(err => {
-//         console.log(err)
-//         return next(err)})
-// };
 
-module.exports = { getAllPosts, getSinglePost, getPostsByTag, createPosts };
+const deletePost = (req, res, next) => {
+  let postId = parseInt(req.params.id);
+  db.result("DELETE FROM posts WHERE id=$1", postId)
+    .then(result => {
+      res.status(200).json({
+        status: "success",
+        message: "You deleted the post",
+        body: result
+      });
+    })
+    .catch(err => {
+        console.log(err)
+        return next(err)})
+};
+
+module.exports = { getAllPosts, getSinglePost, getPostsByTag, createPosts,deletePost };
 
 // createPost, updatePost,
