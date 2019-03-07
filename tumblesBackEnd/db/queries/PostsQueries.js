@@ -34,7 +34,7 @@ const getAllPosts = (req, res, next) => {
 
 const getPostsByTag = (req, res, next) => {
   let tagId = req.params.id;
-  // console.log(typeof tagId);
+  console.log(typeof tagId);
   db.any(
     "SELECT text_title,text_body,handle,COUNT(user_id) AS Likes FROM posts JOIN posts_tags ON post_id = posts.id JOIN tags ON tag_id = tags.id JOIN likes ON likes.post_id = posts.id WHERE tags.handle = $1 GROUP BY text_title, text_body, handle",
     tagId
@@ -52,9 +52,6 @@ const getPostsByTag = (req, res, next) => {
     });
 };
 
-// Have not worked on the logic to determine post_type
-//  if yada yada then its a text else if video yada yada
-//
 const createPosts = (req, res, next) => {
   db.none(
     "INSERT INTO posts(text_title,text_body,url,post_type) VALUES(${text_title},${text_body},${url},${post_type})",
@@ -107,5 +104,3 @@ const deletePost = (req, res, next) => {
 };
 
 module.exports = { getAllPosts, getSinglePost, getPostsByTag, createPosts,deletePost };
-
-// createPost, updatePost,

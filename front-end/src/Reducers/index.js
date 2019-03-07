@@ -1,7 +1,7 @@
 import { combineReducers } from "redux";
 
 import loginReducer from "./loginReducer";
-import searchbarReducer from './searchbarReducer'
+// import searchbarReducer from './searchbarReducer'
 
 const rootReducer = combineReducers({
   loginReducer: loginReducer,

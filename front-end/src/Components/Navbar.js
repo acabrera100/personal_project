@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import "../CSS/Navbar.css";
-import axios from "axios"
+import axios from "axios";
 
 class Navbar extends Component {
   constructor() {
@@ -11,17 +11,19 @@ class Navbar extends Component {
     };
   }
   handleSearchbar = event => {
-    event.preventDefault()
+    event.preventDefault();
+    axios.get(`/posts/tag/${this.state.searchInput}`).then(res => {
+      console.log(res);
+      console.log(res.data);
+      if(!res.data.body.length){
+        console.log("Render something here");
+      }
+    })
 
-
-  axios.get(`/posts/tag/:id`, this.state.searchInput ).then(res => {
-    console.log(res);
-    console.log(res.data);
-  });
-
-};
-// Searchbar text change
-handleChange = e => {
+  };
+  // Searchbar text change
+  handleChange = e => {
+    console.log(this.state.searchInput);
     this.setState({
       [e.target.name]: e.target.value
     });
@@ -43,8 +45,7 @@ handleChange = e => {
               className="text"
               placeholder="  Search..."
               type="text"
-              value={this.searchInput}
-              name="search"
+              name="searchInput"
               id="search"
               onChange={this.handleChange}
             />
