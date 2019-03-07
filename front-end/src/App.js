@@ -3,7 +3,7 @@ import { Switch, Route } from "react-router-dom";
 import  Navbar  from "./Components/Navbar";
 import Dashboard from "./Components/Dashboard";
 import { Home } from "./Components/Home";
-// import { Explore } from "./Components/Explore";
+import { Explore } from "./Components/Explore";
 // import { Login } from "./Components/Login";
 import axios from "axios";
 // import AuthForm from "./Components/login/AuthForm.js";
@@ -29,10 +29,10 @@ class App extends Component {
   checkAuthenticateStatus = () => {
     axios.get("/session/isLoggedIn").then(user => {
       if (user.data.username === Auth.getToken()) {
-        // this.setState({
-        //   isLoggedIn: Auth.isUserAuthenticated(),
-        //   usernamename: Auth.getToken()
-        // });
+        this.setState({
+          isLoggedIn: Auth.isUserAuthenticated(),
+          usernamename: Auth.getToken()
+        });
       } else {
         if (user.data.username) {
           this.logoutUser();
@@ -43,22 +43,22 @@ class App extends Component {
     });
   };
 
-  logoutUser = () => {
-    axios
-      .post("/session/logout")
-      .then(() => {
-        Auth.deauthenticateUser();
-      })
-      .then(() => {
-        this.checkAuthenticateStatus();
-      });
-  };
+  // logoutUser = () => {
+  //   axios
+  //     .post("/session/logout")
+  //     .then(() => {
+  //       Auth.deauthenticateUser();
+  //     })
+  //     .then(() => {
+  //       this.checkAuthenticateStatus();
+  //     });
+  // };
 
   render() {
-    // const { isLoggedIn, username } = this.state;
+    // const { isLoggedIn } = this.state;
     // let greeting = isLoggedIn ? (
     //   <span>
-    //     Welcome {username} {" ~ "}
+    //     Welcome {this.state.username} {" ~ "}
     //   </span>
     // ) : null;
     // let logoutButton = isLoggedIn ? (
@@ -72,12 +72,14 @@ class App extends Component {
 
     return (
       <div className="App">
-    <Navbar />
+    <Navbar isLoggedIn={this.state.isLoggedIn} username={this.state.username}/>
 
         <Switch>
           <Route path="/auth" component={loginContainer} />
           <PrivateRoute path="/dashboard" component={Dashboard} />
           <PrivateRoute path="/home" component={Home} />
+          <Route path="/explore" component={Explore} />
+
         </Switch>
       </div>
     );
